@@ -3,9 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Personalverwaltung.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <viewModel:MainViewModel x:Key="Vm"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+
+    <Grid DataContext="{StaticResource Vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="50"/>
@@ -24,16 +34,16 @@
         <Label Grid.Row="1" Margin="10 0 10 0"  FontSize="12" Padding="0" Width="Auto" VerticalAlignment="Top">Name</Label>
         <TextBox Grid.Row="1" Grid.Column="0" Margin="10,20,10,5" Padding="0" Width="Auto"/>
         <Label Grid.Row="3" Grid.Column="0" Margin="10 0 10 0"  FontSize="12" Padding="0" Width="Auto" VerticalAlignment="Top">Gefundene Personen</Label>
-        <ListView Grid.Row="3" Grid.Column="0" Margin="10 20 10 5" SelectionMode="Single" Name="ListView">
+        <ListView ItemsSource="{Binding PersonView, Mode=OneWay}" Grid.Row="3" Grid.Column="0" Margin="10 20 10 5" SelectionMode="Single" Name="ListView">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="" Width="10"/>
-                    <GridViewColumn Header="ID" Width="20"/>
-                    <GridViewColumn Header="Vorname" Width="Auto"/>
-                    <GridViewColumn Header="Nachname" Width="Auto"/>
-                    <GridViewColumn Header="Strasse" Width="Auto"/>
-                    <GridViewColumn Header="Ort" Width="Auto"/>
-                    <GridViewColumn Header="PLZ" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Vorname}" Header="Vorname" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Nachname}" Header="Nachname" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Strasse}" Header="Strasse" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Ort}" Header="Ort" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Plz}" Header="PLZ" Width="Auto"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -42,7 +52,7 @@
 
 
         <Button Grid.Column="1" Grid.Row="1" Margin="10 20 10 5">Suchen</Button>
-        <Grid Grid.Row="3" Grid.Column="1">
+        <Grid DataContext="{Binding SelectedItem, ElementName=ListView}" Grid.Row="3" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
@@ -67,12 +77,12 @@
             <Label Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Strasse</Label>
             <Label Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Ort</Label>
             <Label Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">PLZ</Label>
-            <TextBox Grid.Column="2" Grid.Row="1" Width="Auto" Margin="2"/>
-            <TextBox Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2"/>
-            <TextBox Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2"/>
-            <TextBox Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2"/>
-            <TextBox Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2"/>
-            <TextBox Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Id}" Grid.Column="2" Grid.Row="1" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Vorname}" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Nachname}" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Strasse}" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Ort}" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2"/>
+            <TextBox Text="{Binding Plz}" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2"/>
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
