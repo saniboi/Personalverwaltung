@@ -57,11 +57,13 @@ namespace Personalverwaltung.ViewModel
 
         private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            Person person = new();
+            personList.Add(person);
+            personView.MoveCurrentTo(person);
         }
         private void NewCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            e.CanExecute = true;
         }
         private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -73,7 +75,7 @@ namespace Personalverwaltung.ViewModel
         }
         private void DeleteExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Person persDelete = PersonView.CurrentItem as Person;
+            Person persDelete = (Person) PersonView.CurrentItem;
             if (persDelete != null)
             {
                 personList.Remove(persDelete);
@@ -83,7 +85,7 @@ namespace Personalverwaltung.ViewModel
         }
         private void DeleteCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            e.CanExecute = PersonView.Count > 0;
         }
 
     }
