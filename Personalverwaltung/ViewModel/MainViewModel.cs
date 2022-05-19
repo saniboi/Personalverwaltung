@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Xml.Serialization;
 using Personalverwaltung.Model;
 
@@ -9,10 +10,27 @@ namespace Personalverwaltung.ViewModel
     internal class MainViewModel
     {
         private ListCollectionView personView;
-
+        private CommandBinding newCommandBinding;
+        private CommandBinding saveCommandBinding;
+        private CommandBinding deleteCommandBinding;
         public ListCollectionView PersonView
         {
             get => personView;
+        }
+
+        public CommandBinding NewCommandBinding
+        {
+            get => newCommandBinding;
+        }
+
+        public CommandBinding SaveCommandBinding
+        {
+            get => saveCommandBinding;
+        }
+
+        public CommandBinding DeleteCommandBinding
+        {
+            get => deleteCommandBinding;
         }
 
         private void LoadPersons(ref ObservableCollection<Person> liste)
