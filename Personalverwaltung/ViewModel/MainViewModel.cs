@@ -9,6 +9,7 @@ namespace Personalverwaltung.ViewModel
 {
     internal class MainViewModel
     {
+        private ObservableCollection<Person> personList;
         private ListCollectionView personView;
         private CommandBinding newCommandBinding;
         private CommandBinding saveCommandBinding;
@@ -46,9 +47,44 @@ namespace Personalverwaltung.ViewModel
 
         public MainViewModel()
         {
-            var personList = new ObservableCollection<Person>();
+            personList = new ObservableCollection<Person>();
             LoadPersons(ref personList);
             personView = new ListCollectionView(personList);
+            newCommandBinding = new CommandBinding(ApplicationCommands.New, NewExecuted, NewCanExecute);
+            saveCommandBinding = new CommandBinding(ApplicationCommands.Save, SaveExecuted, SaveCanExecute);
+            deleteCommandBinding = new CommandBinding(ApplicationCommands.Delete, DeleteExecuted, DeleteCanExecute);
         }
+
+        private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        private void NewCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        private void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+        private void DeleteExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Person persDelete = PersonView.CurrentItem as Person;
+            if (persDelete != null)
+            {
+                personList.Remove(persDelete);
+            }
+
+            personView.MoveCurrentToFirst();
+        }
+        private void DeleteCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
