@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Personalverwaltung.Annotations;
 
@@ -13,10 +12,9 @@ namespace Personalverwaltung.ViewModel
         protected void SetProperty<T>(ref T storage, T value,
             [CallerMemberName] string property = null)
         {
-            if (Object.Equals(storage, value)) return;
+            if (Equals(storage, value)) return;
             storage = value;
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
