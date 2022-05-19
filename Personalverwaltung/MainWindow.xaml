@@ -139,9 +139,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{DynamicResource RoundButton}" Grid.Column="0" Width="Auto" Margin="10" Content="Eintrag Erfassen"/>
-            <Button Style="{DynamicResource RoundButton}" Grid.Column="1" Width="Auto" Margin="10" Content="Speichern"/>
-            <Button Style="{DynamicResource RoundButton}" Grid.Column="2" Width="Auto" Margin="10" Content="Löschen"/>
+            <Button Command="ApplicationCommands.New" Style="{DynamicResource RoundButton}" Grid.Column="0" Width="Auto" Margin="10" Content="Eintrag Erfassen"/>
+            <Button Command="ApplicationCommands.Save" Style="{DynamicResource RoundButton}" Grid.Column="1" Width="Auto" Margin="10" Content="Speichern"/>
+            <Button Command="ApplicationCommands.Delete" Style="{DynamicResource RoundButton}" Grid.Column="2" Width="Auto" Margin="10" Content="Löschen"/>
         </Grid>
 
     </Grid>
