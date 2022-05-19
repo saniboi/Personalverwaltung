@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Personalverwaltung.ViewModel;
 
 namespace Personalverwaltung
 {
@@ -23,6 +24,11 @@ namespace Personalverwaltung
         public MainWindow()
         {
             InitializeComponent();
+            MainViewModel vm = (MainViewModel) this.TryFindResource("vm");
+            if (vm == null) return;
+            this.CommandBindings.Add(vm.NewCommandBinding);
+            this.CommandBindings.Add(vm.DeleteCommandBinding);
+            this.CommandBindings.Add(vm.SaveCommandBinding);
         }
     }
 }
