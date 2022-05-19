@@ -83,7 +83,7 @@
         <Label Grid.Row="1" Margin="10 0 10 0"  FontSize="12" Padding="0" Width="Auto" VerticalAlignment="Top">Name</Label>
         <TextBox Grid.Row="1" Grid.Column="0" Margin="10,20,10,5" Padding="0" Width="Auto" FontFamily="Arial"/>
         <Label Grid.Row="3" Grid.Column="0" Margin="10 0 10 0"  FontSize="12" Padding="0" Width="Auto" VerticalAlignment="Top">Gefundene Personen</Label>
-        <ListView ItemsSource="{Binding PersonView, Mode=OneWay}" Grid.Row="3" Grid.Column="0" Margin="10 20 10 5" SelectionMode="Single" Name="ListView">
+        <ListView DataContext="{Binding }" ItemsSource="{Binding PersonView, Mode=OneWay}" Grid.Row="3" Grid.Column="0" Margin="10 20 10 5" SelectionMode="Single" Name="ListView">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="" Width="10"/>
