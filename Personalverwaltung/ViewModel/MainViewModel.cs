@@ -8,7 +8,6 @@ namespace Personalverwaltung.ViewModel
 {
     internal class MainViewModel
     {
-        private ObservableCollection<Person> personList;
         private ListCollectionView personView;
 
         public ListCollectionView PersonView
@@ -29,7 +28,7 @@ namespace Personalverwaltung.ViewModel
 
         public MainViewModel()
         {
-            personList = new ObservableCollection<Person>();
+            var personList = new ObservableCollection<Person>();
             LoadPersons(ref personList);
             personView = new ListCollectionView(personList);
         }
