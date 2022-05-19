@@ -126,12 +126,12 @@
             <Label Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Strasse</Label>
             <Label Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Ort</Label>
             <Label Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">PLZ</Label>
-            <TextBox Text="{Binding Id}" Grid.Column="2" Grid.Row="1" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <TextBox Text="{Binding Vorname}" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <TextBox Text="{Binding Nachname}" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <TextBox Text="{Binding Strasse}" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <TextBox Text="{Binding Ort}" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <TextBox Text="{Binding Plz}" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Id}" Grid.Column="2" Grid.Row="1" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Vorname}" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Nachname}" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Strasse}" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Ort}" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Plz}" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2" FontFamily="Arial"/>
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
