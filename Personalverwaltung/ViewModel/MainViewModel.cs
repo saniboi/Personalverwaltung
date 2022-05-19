@@ -9,8 +9,15 @@ namespace Personalverwaltung.ViewModel
 {
     internal class MainViewModel
     {
+        #region Listen
+
         private ObservableCollection<Person> personList;
         private ListCollectionView personView;
+
+        #endregion
+
+        #region Command 
+
         private CommandBinding newCommandBinding;
         private CommandBinding saveCommandBinding;
         private CommandBinding deleteCommandBinding;
@@ -34,6 +41,9 @@ namespace Personalverwaltung.ViewModel
             get => deleteCommandBinding;
         }
 
+        #endregion
+
+        #region Personen Laden
         private void LoadPersons(ref ObservableCollection<Person> liste)
         {
             if (File.Exists("Persons.xml"))
@@ -45,6 +55,10 @@ namespace Personalverwaltung.ViewModel
             }
         }
 
+        #endregion
+
+        #region Konstruktor
+
         public MainViewModel()
         {
             personList = new ObservableCollection<Person>();
@@ -55,6 +69,9 @@ namespace Personalverwaltung.ViewModel
             deleteCommandBinding = new CommandBinding(ApplicationCommands.Delete, DeleteExecuted, DeleteCanExecute);
         }
 
+        #endregion
+
+        #region RoutedEvents
         private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Person person = new();
@@ -67,15 +84,15 @@ namespace Personalverwaltung.ViewModel
         }
         private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+
         }
         private void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+
         }
         private void DeleteExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Person persDelete = (Person) PersonView.CurrentItem;
+            Person persDelete = (Person)PersonView.CurrentItem;
             if (persDelete != null)
             {
                 personList.Remove(persDelete);
@@ -87,6 +104,8 @@ namespace Personalverwaltung.ViewModel
         {
             e.CanExecute = PersonView.Count > 0;
         }
+
+        #endregion
 
     }
 }
