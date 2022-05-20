@@ -16,6 +16,18 @@ namespace Personalverwaltung.ViewModel
         private ListCollectionView personView;
 
         #endregion
+        
+        #region Mouse Trigger Eigenschaften
+
+        private string personDetails;
+
+        public string PersonDetails
+        {
+            get => personDetails;
+            set => SetProperty(ref personDetails, value);
+        }
+
+        #endregion
 
         #region Command 
 
@@ -74,9 +86,12 @@ namespace Personalverwaltung.ViewModel
             MouseLeaveCommand = new RelayCommand(MouseLeaveExecute, MouseLeaveCanExecute);
         }
 
+        #endregion
+
+        #region Events
         private void MouseEnterExecute(object obj)
         {
-            Person selPerson = (Person) personView.CurrentItem;
+            Person selPerson = (Person)personView.CurrentItem;
             if (selPerson != null)
             {
                 PersonDetails = selPerson.Details;
@@ -101,10 +116,6 @@ namespace Personalverwaltung.ViewModel
         {
             return true;
         }
-
-        #endregion
-
-        #region Events
         private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Person person = new();
@@ -138,18 +149,6 @@ namespace Personalverwaltung.ViewModel
             e.CanExecute = PersonView.Count > 0;
         }
         
-
-        #endregion
-
-        #region Mouse Trigger
-
-        private string personDetails;
-
-        public string PersonDetails
-        {
-            get => personDetails;
-            set => SetProperty(ref personDetails, value);
-        }
 
         #endregion
     }
