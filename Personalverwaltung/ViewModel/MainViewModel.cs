@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Configuration;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -7,7 +8,7 @@ using Personalverwaltung.Model;
 
 namespace Personalverwaltung.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : ViewModelBase
     {
         #region Listen
 
@@ -107,5 +108,16 @@ namespace Personalverwaltung.ViewModel
 
         #endregion
 
+        #region Mouse Trigger
+
+        private string personDetails;
+
+        public string PersonDetails
+        {
+            get => personDetails;
+            set => SetProperty<string>(ref personDetails, value);
+        }
+
+        #endregion
     }
 }
