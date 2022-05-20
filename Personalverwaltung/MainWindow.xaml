@@ -131,13 +131,22 @@
             <TextBox DataContext="{Binding}" Text="{Binding Strasse}" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Ort}" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Plz}" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2" FontFamily="Arial"/>
-            <Grid Name="gridInfo" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" >
+            <Grid Name="GridInfo" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0">Details:</Label>
-                <TextBox Name="txtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5"/>
+                <Label Grid.Row="0" Padding="0" FontSize="12" Content="Details"/>
+                <TextBox Name="TxtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding MouseEnterCommand}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeave">
+                            <i:InvokeCommandAction Command="{Binding MouseLeaveCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
             </Grid>
         </Grid>
 
