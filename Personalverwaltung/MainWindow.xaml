@@ -137,7 +137,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Padding="0" FontSize="12" Content="Details"/>
-                <TextBox Name="TxtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5">
+                <TextBox DataContext="{StaticResource Vm}" Text="{Binding PersonDetails, UpdateSourceTrigger=PropertyChanged}" Name="TxtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">
                             <i:InvokeCommandAction Command="{Binding MouseEnterCommand}"/>
