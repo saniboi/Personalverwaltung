@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Configuration;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Serialization;
+using Personalverwaltung.Command;
 using Personalverwaltung.Model;
 
 namespace Personalverwaltung.ViewModel
@@ -42,6 +42,8 @@ namespace Personalverwaltung.ViewModel
             get => deleteCommandBinding;
         }
 
+        public ICommand MouseEnterCommand { get; private set; }
+        public ICommand MouseLeaveCommand { get; private set; }
         #endregion
 
         #region Personen Laden
@@ -68,11 +70,41 @@ namespace Personalverwaltung.ViewModel
             newCommandBinding = new CommandBinding(ApplicationCommands.New, NewExecuted, NewCanExecute);
             saveCommandBinding = new CommandBinding(ApplicationCommands.Save, SaveExecuted, SaveCanExecute);
             deleteCommandBinding = new CommandBinding(ApplicationCommands.Delete, DeleteExecuted, DeleteCanExecute);
+            MouseEnterCommand = new RelayCommand(MouseEnterExecute, MouseEnterCanExevute);
+            MouseLeaveCommand = new RelayCommand(MouseLeaveExecute, MouseLeaveCanExecute);
+        }
+
+        private void MouseEnterExecute(object obj)
+        {
+            Person selPerson = (Person) personView.CurrentItem;
+            if (selPerson != null)
+            {
+                PersonDetails = selPerson.Details;
+            }
+        }
+
+        private bool MouseEnterCanExevute(object arg)
+        {
+            return true;
+        }
+
+        private void MouseLeaveExecute(object obj)
+        {
+            if (personView.CurrentItem != null)
+            {
+                ((Person)personView.CurrentItem).Details = personDetails;
+            }
+            PersonDetails = string.Empty;
+        }
+
+        private bool MouseLeaveCanExecute(object arg)
+        {
+            return true;
         }
 
         #endregion
 
-        #region RoutedEvents
+        #region Events
         private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Person person = new();
@@ -105,6 +137,7 @@ namespace Personalverwaltung.ViewModel
         {
             e.CanExecute = PersonView.Count > 0;
         }
+        
 
         #endregion
 
@@ -115,7 +148,7 @@ namespace Personalverwaltung.ViewModel
         public string PersonDetails
         {
             get => personDetails;
-            set => SetProperty<string>(ref personDetails, value);
+            set => SetProperty(ref personDetails, value);
         }
 
         #endregion
