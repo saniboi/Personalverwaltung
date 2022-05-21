@@ -92,7 +92,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID" Width="Auto"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Vorname}" Header="Vorname" Width="Auto"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Nachname}" Header="Nachname" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Geburtstag}" Header="Geburtsdatum" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Geburtsdatum}" Header="Geburtsdatum" Width="Auto"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Strasse}" Header="Strasse" Width="Auto"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Plz}" Header="PLZ" Width="Auto"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Ort}" Header="Ort" Width="Auto"/>
@@ -132,7 +132,7 @@
             <TextBox DataContext="{Binding}" Text="{Binding Id}" Padding="5" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Vorname}" Padding="5" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Nachname}" Padding="5" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Geburtstag}" Padding="5" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding}" Text="{Binding Geburtsdatum}" Padding="5" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Strasse}" Padding="5" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Plz}" Padding="5" Grid.Column="2" Grid.Row="7" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
             <TextBox DataContext="{Binding}" Text="{Binding Ort}" Padding="5" Grid.Column="2" Grid.Row="8" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>

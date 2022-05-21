@@ -1,4 +1,5 @@
-﻿using Personalverwaltung.ViewModel;
+﻿using System;
+using Personalverwaltung.ViewModel;
 
 namespace Personalverwaltung.Model
 {
@@ -26,6 +27,15 @@ namespace Personalverwaltung.Model
             get => nachname;
 
             set => SetProperty(ref nachname, value);
+        }
+
+        private DateTime? geburtsdatum;
+
+        public DateTime? Geburtsdatum
+        {
+            get => geburtsdatum;
+
+            set => SetProperty(ref geburtsdatum, value);
         }
 
         private string strasse;

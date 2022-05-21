@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Personalverwaltung.ViewModel
 {
-    internal class PDateTimeViewModel : BaseViewModel
+    internal class PDateTimeViewModel : ViewModelBase
     {
         private DateTime? currentValue;
         private DateTime? originalValue;
