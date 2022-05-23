@@ -12,7 +12,7 @@ namespace Personalverwaltung.ViewModel
     {
         #region Listen
 
-        private ObservableCollection<Person> personList;
+        private ObservableCollection<PersonViewModel> personList;
         private ListCollectionView personView;
 
         #endregion
@@ -24,6 +24,7 @@ namespace Personalverwaltung.ViewModel
         public string PersonDetails
         {
             get => personDetails;
+
             set => SetProperty(ref personDetails, value);
         }
 
@@ -59,15 +60,15 @@ namespace Personalverwaltung.ViewModel
         #endregion
 
         #region Personen Laden
-        private void LoadPersons(ref ObservableCollection<Person> liste)
+        private void LoadPersons(ref ObservableCollection<PersonViewModel> liste)
         {
-            if (File.Exists("Persons.xml"))
-            {
-                FileStream fs = new FileStream("Persons.xml", FileMode.Open);
-                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Person>));
-                liste = (ObservableCollection<Person>)serializer.Deserialize(fs);
-                fs.Close();
-            }
+            if (!File.Exists("Persons.xml")) return;
+            FileStream fs = new FileStream("Persons.xml", FileMode.Open);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Person>));
+            var tempList = (ObservableCollection<Person>)serializer.Deserialize(fs);
+            foreach (var item in tempList) 
+                liste.Add(new PersonViewModel(item));
+            fs.Close();
         }
 
         #endregion
@@ -76,9 +77,14 @@ namespace Personalverwaltung.ViewModel
 
         public MainViewModel()
         {
-            personList = new ObservableCollection<Person>();
+            // Personenliste wird befüllt
+            personList = new ObservableCollection<PersonViewModel>();
             LoadPersons(ref personList);
+
+            // ListCollectionView wird initialisiert wird in diesem Beispiel welcher von mir aufgebaut wurde nicht verwendet
             personView = new ListCollectionView(personList);
+
+
             newCommandBinding = new CommandBinding(ApplicationCommands.New, NewExecuted, NewCanExecute);
             saveCommandBinding = new CommandBinding(ApplicationCommands.Save, SaveExecuted, SaveCanExecute);
             deleteCommandBinding = new CommandBinding(ApplicationCommands.Delete, DeleteExecuted, DeleteCanExecute);
@@ -91,10 +97,10 @@ namespace Personalverwaltung.ViewModel
         #region Events
         private void MouseEnterExecute(object obj)
         {
-            Person selPerson = (Person)personView.CurrentItem;
+            PersonViewModel selPerson = (PersonViewModel)personView.CurrentItem;
             if (selPerson != null)
             {
-                PersonDetails = selPerson.Details;
+                PersonDetails = selPerson.Details.Value;
             }
         }
 
@@ -107,7 +113,7 @@ namespace Personalverwaltung.ViewModel
         {
             if (personView.CurrentItem != null)
             {
-                ((Person)personView.CurrentItem).Details = personDetails;
+                ((PersonViewModel)personView.CurrentItem).Details.Value = personDetails;
             }
             PersonDetails = string.Empty;
         }
@@ -118,7 +124,7 @@ namespace Personalverwaltung.ViewModel
         }
         private void NewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Person person = new();
+            PersonViewModel person = new(null);
             personList.Add(person);
             personView.MoveCurrentTo(person);
         }
@@ -136,7 +142,7 @@ namespace Personalverwaltung.ViewModel
         }
         private void DeleteExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Person persDelete = (Person)PersonView.CurrentItem;
+            PersonViewModel persDelete = (PersonViewModel)PersonView.CurrentItem;
             if (persDelete != null)
             {
                 personList.Remove(persDelete);
