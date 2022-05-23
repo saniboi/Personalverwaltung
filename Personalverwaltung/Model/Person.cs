@@ -54,8 +54,8 @@ namespace Personalverwaltung.Model
             set => SetProperty(ref ort, value);
         }
 
-        private int plz;
-        public int Plz
+        private string plz;
+        public string Plz
         {
             get => plz;
             
