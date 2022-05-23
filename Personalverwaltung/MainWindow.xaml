@@ -6,56 +6,15 @@
         xmlns:viewModel="clr-namespace:Personalverwaltung.ViewModel"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Personalverwaltung" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Window.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/RundeButtons.xaml" />
+                <ResourceDictionary Source="Resources/AnzeigeTextboxen.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <viewModel:MainViewModel x:Key="Vm"/>
-            <Style x:Key="FocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="RoundButton" TargetType="{x:Type Button}">
-                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-                <Setter Property="Background" Value="#FF8CB2BF"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="FontFamily" Value="Arial"/>
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="1"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="border" CornerRadius="14" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                                <Border.Effect>
-                                    <DropShadowEffect BlurRadius="7" Direction="330" Color="Black" ShadowDepth="4" Opacity="0.3"/>
-                                </Border.Effect>
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsDefaulted" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFEAC871"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFEAC871"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFF1D691"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FFF1D691"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -88,19 +47,19 @@
         <ListView DataContext="{Binding }" ItemsSource="{Binding PersonView, Mode=OneWay}" Grid.Row="3" Grid.Column="0" Margin="10 20 10 5" SelectionMode="Single" Name="ListView">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="" Width="10"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Vorname}" Header="Vorname" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Nachname}" Header="Nachname" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Geburtsdatum}" Header="Geburtsdatum" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Strasse}" Header="Strasse" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Plz}" Header="PLZ" Width="Auto"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Ort}" Header="Ort" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Changed}"  Header="" Width="20"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id.Value, TargetNullValue=[keine Angabe]}" Header="ID" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Vorname.Value, TargetNullValue=[keine Angabe]}" Header="Vorname" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Nachname.Value, TargetNullValue=[keine Angabe]}" Header="Nachname" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Geburtsdatum.Value, TargetNullValue=[keine Angabe]}" Header="Geburtsdatum" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Strasse.Value, TargetNullValue=[keine Angabe]}" Header="Strasse" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Plz.Value, TargetNullValue=[keine Angabe]}" Header="PLZ" Width="Auto"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Ort.Value, TargetNullValue=[keine Angabe]}" Header="Ort" Width="Auto"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <Button Style="{DynamicResource RoundButton}" Grid.Column="1" Grid.Row="1" Margin="16 20 12 5">Suchen</Button>
+        <Button Grid.Column="1" Grid.Row="1" Margin="16 20 12 5" Style="{DynamicResource RoundButton}">Suchen</Button>
         <Grid DataContext="{Binding SelectedItem, ElementName=ListView}" Grid.Row="3" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="19*"/>
@@ -129,13 +88,24 @@
             <Label Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Strasse</Label>
             <Label Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">PLZ</Label>
             <Label Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Ort</Label>
-            <TextBox DataContext="{Binding}" Text="{Binding Id}" Padding="5" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Vorname}" Padding="5" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Nachname}" Padding="5" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Geburtsdatum}" Padding="5" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Strasse}" Padding="5" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Plz}" Padding="5" Grid.Column="2" Grid.Row="7" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
-            <TextBox DataContext="{Binding}" Text="{Binding Ort}" Padding="5" Grid.Column="2" Grid.Row="8" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Id}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="2" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Vorname}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="3" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Nachname}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Geburtsdatum}" Text="{Binding Value, TargetNullValue=[keine Angabe]}" Padding="5" Grid.Column="2" Grid.Row="5" Width="Auto" Margin="2,2,2,2" FontFamily="Arial">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasError}" Value="true">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <TextBox DataContext="{Binding Strasse}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="6" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Plz}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="7" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
+            <TextBox DataContext="{Binding Ort}" Text="{Binding Value}" Padding="5" Grid.Column="2" Grid.Row="8" Width="Auto" Margin="2,2,2,2" FontFamily="Arial"/>
 
             <Grid Name="GridInfo" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,30,0,0" Grid.RowSpan="2" >
                 <Grid.RowDefinitions>
@@ -143,7 +113,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Padding="0" FontSize="12" Content="Details"/>
-                <TextBox DataContext="{StaticResource Vm}" Text="{Binding PersonDetails, UpdateSourceTrigger=PropertyChanged}" Name="TxtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5">
+                <TextBox Style="{x:Null}" DataContext="{StaticResource Vm}" Text="{Binding PersonDetails, UpdateSourceTrigger=PropertyChanged, TargetNullValue=[keine Angabe]}" Name="TxtDetailInformation" Grid.Row="1" TextWrapping="Wrap" Margin="0 0 2 5">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">
                             <i:InvokeCommandAction Command="{Binding MouseEnterCommand}"/>
@@ -163,9 +133,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Command="ApplicationCommands.New" Style="{DynamicResource RoundButton}" Grid.Column="0" Width="Auto" Margin="10" Content="Eintrag Erfassen"/>
-            <Button Command="ApplicationCommands.Save" Style="{DynamicResource RoundButton}" Grid.Column="1" Width="Auto" Margin="10" Content="Speichern"/>
-            <Button Command="ApplicationCommands.Delete" Style="{DynamicResource RoundButton}" Grid.Column="2" Width="Auto" Margin="10" Content="Löschen"/>
+            <Button Command="ApplicationCommands.New" Grid.Column="0" Width="Auto" Margin="10" Content="Eintrag Erfassen" Style="{DynamicResource RoundButton}"/>
+            <Button Command="ApplicationCommands.Save" Grid.Column="1" Width="Auto" Margin="10" Content="Speichern" Style="{DynamicResource RoundButton}"/>
+            <Button Command="ApplicationCommands.Delete" Grid.Column="2" Width="Auto" Margin="10" Content="Löschen" Style="{DynamicResource RoundButton}"/>
         </Grid>
 
     </Grid>
