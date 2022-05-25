@@ -62,8 +62,9 @@ namespace Personalverwaltung.ViewModel
         #region Personen Laden
         private void LoadPersons(ref ObservableCollection<PersonViewModel> liste)
         {
-            if (!File.Exists("Persons.xml")) return;
-            FileStream fs = new FileStream("Persons.xml", FileMode.Open);
+            var dataPersonsXml = "Data\\Persons.xml";
+            if (!File.Exists(dataPersonsXml)) return;
+            FileStream fs = new FileStream(dataPersonsXml, FileMode.Open);
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Person>));
             var tempList = (ObservableCollection<Person>)serializer.Deserialize(fs);
             foreach (var item in tempList) 
@@ -81,7 +82,7 @@ namespace Personalverwaltung.ViewModel
             personList = new ObservableCollection<PersonViewModel>();
             LoadPersons(ref personList);
 
-            // ListCollectionView wird initialisiert wird in diesem Beispiel welcher von mir aufgebaut wurde nicht verwendet
+            // ListCollectionView wird initialisiert
             personView = new ListCollectionView(personList);
 
 
