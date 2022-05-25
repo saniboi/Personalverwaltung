@@ -21,12 +21,12 @@ namespace Personalverwaltung.ViewModel
             if (person != null)
             {
                 this.person = person;
-                initializeFields();
+                InitializeFields();
             }
             else
             {
                 this.person = new Person();
-                initializeFields();
+                InitializeFields();
                 id.HasChanged = true;
                 vorname.HasChanged = true;
                 nachname.HasChanged = true;
@@ -47,7 +47,7 @@ namespace Personalverwaltung.ViewModel
             details.PropertyChanged += person_PropertyChanged;
         }
 
-        private void initializeFields()
+        private void InitializeFields()
         {
             id = new PStringViewModel(person.Id);
             vorname = new PStringViewModel(person.Vorname);
@@ -73,45 +73,21 @@ namespace Personalverwaltung.ViewModel
 
         #region Eigenschaften
 
-        public PStringViewModel Id
-        {
-            get => id;
-        }
+        public PStringViewModel Id => id;
 
-        public PStringViewModel Vorname
-        {
-            get => vorname;
-        }
+        public PStringViewModel Vorname => vorname;
 
-        public PStringViewModel Nachname
-        {
-            get => nachname;
-        }
+        public PStringViewModel Nachname => nachname;
 
-        public PDateTimeViewModel Geburtsdatum
-        {
-            get => geburtsdatum;
-        }
+        public PDateTimeViewModel Geburtsdatum => geburtsdatum;
 
-        public PStringViewModel Strasse
-        {
-            get => strasse;
-        }
+        public PStringViewModel Strasse => strasse;
 
-        public PStringViewModel Ort
-        {
-            get => ort;
-        }
+        public PStringViewModel Ort => ort;
 
-        public PStringViewModel Plz
-        {
-            get => plz;
-        }
+        public PStringViewModel Plz => plz;
 
-        public PStringViewModel Details
-        {
-            get => details;
-        }
+        public PStringViewModel Details => details;
 
         #endregion
 
