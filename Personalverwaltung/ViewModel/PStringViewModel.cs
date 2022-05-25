@@ -3,7 +3,7 @@
     internal class PStringViewModel : ViewModelBase
     {
         private string currentValue;
-        private string originalValue;
+        private readonly string originalValue;
         private bool hasChanged;
 
         public bool HasChanged
@@ -29,7 +29,7 @@
 
             set
             {
-                if (value == "")
+                if (value == " ")
                 {
                     value = null;
                 }
