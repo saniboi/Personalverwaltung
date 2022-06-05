@@ -9,7 +9,7 @@ namespace EFCodeFirstSample
         {
             using (var context = new SchoolContext())
             {
-                context.Database.Create();
+                context.Database.CreateIfNotExists();
             }
 
             Console.WriteLine("Datenbank wurde erstellt ...");
